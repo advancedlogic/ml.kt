@@ -1,0 +1,51 @@
+group 'com.al'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        kotlin_version = '1.1-M02'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/"
+    }
+    maven { url "http://dl.bintray.com/jasoet-gdp/org.kotlinslang" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.jetbrains.spek:spek-api:1.0.89'
+    compile "org.kotlinslang:kotlinslang:1.0.2"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+apply plugin: 'application'
+mainClassName = 'com.al.learning.doc.microservice.LearningDocKt'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
